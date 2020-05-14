@@ -8,6 +8,16 @@ use frontend\assets\AppAsset;
 use kv4nt\owlcarousel\OwlCarouselWidget;
 
 AppAsset::register($this);
+
+$this->registerJs("
+jQuery('.btn-slider-next').click(function(){
+    jQuery('#owl-slider-layout').trigger('next.owl.carousel');
+});
+jQuery('.btn-slider-prev').click(function() {
+    jQuery('#owl-slider-layout').trigger('prev.owl.carousel');
+});
+", $this::POS_END);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -25,14 +35,12 @@ AppAsset::register($this);
 
 
 <?php OwlCarouselWidget::begin([
+    'id' => 'owl-slider-layout',
     'container' => 'main',
     'pluginOptions'    => [
         'autoplay'          => false,
-        'nav'               => true,
         'items'             => 1,
         'loop'              => false,
-        'itemsDesktop'      => [1199, 3],
-        'itemsDesktopSmall' => [979, 3]
     ]
 ])?>
     <?=$content?>

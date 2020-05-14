@@ -1,19 +1,11 @@
 <?php
 namespace frontend\controllers;
 
-use frontend\models\ResendVerificationEmailForm;
-use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
-use frontend\models\SignupForm;
-use frontend\models\ContactForm;
 
 use yii\helpers\Url;
 use yii\helpers\Html;
@@ -22,7 +14,7 @@ use yii\helpers\Html;
  */
 class SiteBaseController extends \yii\web\Controller
 {
-    /**
+     /**
      * {@inheritdoc}
      */
     public function behaviors()
@@ -30,24 +22,21 @@ class SiteBaseController extends \yii\web\Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
+                        'actions' => ['error', 'login', 'about'],
                         'allow' => true,
-                        'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout'],
+                        'controllers' => ['tutorial', 'authentication'],
                         'allow' => true,
-                        'roles' => ['@'],
                     ],
                 ],
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    #'logout' => ['post'],
                 ],
             ],
         ];
@@ -80,7 +69,6 @@ class SiteBaseController extends \yii\web\Controller
         
         /// first time in app
         if (!Yii::$app->request->cookies->has('tutorial')) {
-            Url::remember();
             $this->redirect(['tutorial/index']);
         }
 

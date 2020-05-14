@@ -38,7 +38,7 @@ class TutorialController extends SiteBaseController
                     'name' => 'tutorial',
                     'value' => true,
             ]));
-            return $this->redirect(Url::previous());
+            return $this->goHome();
         }
 
         return true; 
