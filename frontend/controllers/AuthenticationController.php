@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 
 use common\models\LoginForm;
+use common\models\User;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use frontend\models\PasswordResetRequestForm;
@@ -30,7 +31,7 @@ class AuthenticationController extends SiteBaseController
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->goHome();
         } else {
             $model->password = '';
 
@@ -60,7 +61,8 @@ class AuthenticationController extends SiteBaseController
      */
     public function actionSignup()
     {
-        $model = new SignupForm();
+        $model = new User(['scenario' => User::SCENARIO_REGISTER]);
+        
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
             return $this->goHome();

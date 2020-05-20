@@ -11,50 +11,40 @@ use yii\web\IdentityInterface;
  * User model
  *
  * @property integer $id
+ * @property string $username
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $verification_token
  * @property string $email
  * @property string $auth_key
- * @property string $status
- * @property datetime $created_at
- * @property datetime $updated_at
+ * @property integer $status
+ * @property integer $created_at
+ * @property integer $updated_at
  * @property string $password write-only password
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-    /**
-     * STATUS ACCOUNT
-     */
-    const STATUS_ACTIVE = 'A';
-    const STATUS_INACTIVE = 'I'; 
-    const STATUS_DELETED = 'D';
+    const STATUS_DELETED = 0;
+    const STATUS_INACTIVE = 9;
+    const STATUS_ACTIVE = 10;
 
-    /**
-     * LIST STATUS ACCOUNT
-     */
-    const LIST_STATUS = [
-        self::STATUS_ACTIVE => 'Active',
-        self::STATUS_INACTIVE => 'Inactived',
-        self::STATUS_DELETED => 'Deleted'
-    ];
-
-    /**
-     * SCENARIOS
-     */
-    const SCENARIO_LOGIN = 'login';
-    const SCENARIO_REGISTER = 'register';
-
-    public $password;
-    public $password_repeat;
-    public $rememberMe = true;
 
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'user';
+        return '{{%user}}';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
     }
 
     /**
@@ -63,59 +53,9 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            /** name */
-            ['name', 'string', 'max' => 255],
-            ['name', 'required'],
-            /** birth */
-            ['date_birth', 'safe'],
-            ['date_birth', 'required'],
-            /** contry */
-            ['contry', 'string'],
-            ['contry', 'required'],
-            ['contry', 'in', 'range' => Local::LIST_CONTRYS],
-            /** password */
-            ['password', 'required', 'on' => self::SCENARIO_REGISTER],
-            ['password', 'string', 'min' => 6],
-            ['password_repeat','compare','compareAttribute' => 'password','skipOnEmpty' => false, 'on' => self::SCENARIO_REGISTER],
-            /** email */
-            ['email', 'trim'],
-            ['email', 'required'],
-            ['email', 'email'],
-            ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.', 'on' => self::SCENARIO_REGISTER],
-            /** status */
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
-            ['status', 'in', 'range' => array_keys(self::LIST_STATUS)],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
         ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function beforeSave($insert)
-    {
-        if (!parent::beforeSave($insert)) {
-            return false;
-        }
-
-        if ($this->isNewRecord) {
-            $this->date_created_at = new \yii\db\Expression('NOW()');
-        } 
-
-        $this->date_updated_at = new \yii\db\Expression('NOW()');
-        return true;
-    }
-
-    public function signup()
-    {
-        if (!$this->validate()){
-            return false;
-        }
-
-        $this->setPassword($this->password);
-        $this->generateAuthKey();
-        $this->generateEmailVerificationToken();
-        return $this->save();
     }
 
     /**
@@ -140,9 +80,9 @@ class User extends ActiveRecord implements IdentityInterface
      * @param string $username
      * @return static|null
      */
-    public static function findByEmail($email)
+    public static function findByUsername($username)
     {
-        return static::findOne(['email' => $email, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**

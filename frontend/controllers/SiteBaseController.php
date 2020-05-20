@@ -23,10 +23,17 @@ class SiteBaseController extends \yii\web\Controller
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
+                    // allow authenticated users
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    // allow especify actions
                     [
                         'actions' => ['error', 'login', 'about'],
                         'allow' => true,
                     ],
+                    // allow especify controllers
                     [
                         'controllers' => ['tutorial', 'authentication'],
                         'allow' => true,
