@@ -8,10 +8,12 @@ use yii\helpers\Html;
 use yii\bootstrap4\Tabs;
 use yii\bootstrap4\NavBar;
 use yii\bootstrap4\Nav;
+use kartik\icons\Icon;
 
 use frontend\assets\AppAsset;
 
 AppAsset::register($this);
+Icon::map($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -46,32 +48,30 @@ NavBar::end();
 ?>
 
 <main class="wrap">
-    <div class="container" style="margin-top:10vmin">
+    <div class="container">
         <?= $content ?>
     </div>
 </main>
 
 <?php if(!Yii::$app->user->isGuest):?>
-<footer class="footer fixed-bottom">
+<footer class="footer fixed-bottom tab-bottom">
     <?=Tabs::widget([
-        'options' => [
-            'class' => 'nav-fill bg-light'
-        ], 
+        'encodeLabels' => false,
         'items' => [
             [
-                'label' => Yii::t('app', 'HELPER_TAB'),
-                'link' => Url::home(),
-                'active' => true
+                'label' => Icon::show('address-card').Yii::t('app', 'Curriculum'),
+                'active' => Yii::$app->controller->module->id == 'curriculum',
+                'url' => ['/curriculum/site/index'],
+            ],        
+            [
+                'label' => Icon::show('graduation-cap').Yii::t('app', 'Class'),
+                'active' => Yii::$app->controller->module->id == 'classroom',
+                'url' => ['/classroom/site/index'],
             ],
             [
-                'label' => Yii::t('app', 'CHALLENGES_TAB'),
-                'link' => '#',
-                'disabled' => true
-            ],
-            [
-                'label' => Yii::t('app', 'PROGRESS_TAB'),
-                'link' => '#',
-                'disabled' => true
+                'label' => Icon::show('suitcase').Yii::t('app', 'Jobs'),
+                'active' => Yii::$app->controller->module->id == 'jobs',
+                'url' => ['/jobs/site/index'],
             ],
         ]
     ])?>

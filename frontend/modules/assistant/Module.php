@@ -1,10 +1,10 @@
 <?php 
 
-namespace frontend\modules;
+namespace frontend\modules\assistant;
 
 use Yii;
 
-class Assistant extends \yii\base\Module
+class Module extends \yii\base\Module
 {
     public $controllerNamespace = 'frontend\modules\assistant\controllers';
 
