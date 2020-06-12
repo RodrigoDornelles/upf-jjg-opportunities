@@ -2,10 +2,13 @@
 namespace common\models;
 
 use Yii;
+use DateTime;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
+use powerkernel\flagiconcss\Flag;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use yii\helpers\ArrayHelper;
 
 /**
  * User model
@@ -283,4 +286,18 @@ class User extends ActiveRecord implements IdentityInterface
         $this->$attribute = date('Y-m-d', strtotime($date));
     }
 
+    public function getAge()
+    {
+        $relative = (new DateTime($this->date_birth))->diff(new DateTime('now'));
+        $string = explode('|', Yii::$app->formatter->asDuration($relative, '|'));
+        return ArrayHelper::getValue($string, 0, null);
+    }
+
+    public function getCountryWithFlag()
+    {
+        return strtr("{flag} {country}",[
+            '{flag}' => Flag::widget(['country' => $this->contry]),
+            '{country}' => Yii::t('app', $this->contry)
+        ]);
+    }
 }

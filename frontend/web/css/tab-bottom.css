@@ -25,8 +25,8 @@
 }
 
 .tab-bottom ul li a.active{
+    color: white !important;
+    padding-top: 10px !important;
     background-color: transparent !important;
     border-top: 5px solid white !important;
-    color: white !important;
-
 }
