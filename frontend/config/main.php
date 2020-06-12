@@ -48,5 +48,10 @@ return [
             ],
         ],
     ],
+    'modules' => [
+        'assistant' => [
+            'class' => 'frontend/modules/Assistant'
+        ]
+    ],
     'params' => $params,
 ];

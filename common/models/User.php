@@ -67,6 +67,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['name', 'string', 'max' => 255],
             ['name', 'required'],
             /** birth */
+            ['date_birth', 'dateNormalize'],
             ['date_birth', 'safe'],
             ['date_birth', 'required'],
             /** contry */
@@ -269,4 +270,17 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+    public function dateNormalize($attribute, $params)
+    {
+        $date = $this->getAttribute($attribute);
+
+        if ($date === null) {
+            return ;
+        }
+
+        $date = str_replace('/', '-', $date);
+        $this->$attribute = date('Y-m-d', strtotime($date));
+    }
+
 }

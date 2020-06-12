@@ -59,7 +59,7 @@ class SiteController extends SiteBaseController
      */
     public function actionLogin()
     {
-        return $this->redirect(['authentication/login']);
+        return $this->redirect(['authentication/index']);
     }
 
 }

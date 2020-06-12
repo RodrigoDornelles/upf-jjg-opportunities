@@ -24,14 +24,14 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body class="bg-black text-white">
 <?php $this->beginBody() ?>
 
 <?php 
 NavBar::begin([
     'brandLabel' => Yii::$app->name,
     'options' => [
-        'class' => 'navbar navbar-dark bg-primary fixed-top'
+        'class' => 'navbar navbar-dark bg-dark fixed-top'
     ]
 ]);
 echo Nav::widget([
@@ -46,7 +46,7 @@ NavBar::end();
 ?>
 
 <main class="wrap">
-    <div class="container">
+    <div class="container" style="margin-top:10vmin">
         <?= $content ?>
     </div>
 </main>

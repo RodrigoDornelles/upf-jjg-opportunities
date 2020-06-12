@@ -118,3 +118,15 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.margin-auto {
+    margin: auto;
+}
+
+.bg-black {
+    background-color: black;
+}
+
+.btn-rounded {
+    border-radius: 100px;
+}

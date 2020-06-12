@@ -18,6 +18,16 @@ use frontend\models\ContactForm;
  */
 class AuthenticationController extends SiteBaseController
 {
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function actionIndex()
+    {
+        return $this->render('index');
+    }
+
      /**
      * Logs in a user.
      *
