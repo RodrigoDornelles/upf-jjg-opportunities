@@ -5,6 +5,7 @@ use Yii;
 use DateTime;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
+use yii\behaviors\SluggableBehavior;
 use powerkernel\flagiconcss\Flag;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
@@ -63,6 +64,20 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * {@inheritdoc}
      */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'name',
+                'ensureUnique' => true,
+            ],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
@@ -73,10 +88,10 @@ class User extends ActiveRecord implements IdentityInterface
             ['date_birth', 'dateNormalize'],
             ['date_birth', 'safe'],
             ['date_birth', 'required'],
-            /** contry */
-            ['contry', 'string'],
-            ['contry', 'required'],
-            ['contry', 'in', 'range' => Local::LIST_CONTRYS],
+            /** country */
+            ['country', 'string'],
+            ['country', 'required'],
+            ['country', 'in', 'range' => Local::LIST_COUNTRYS],
             /** password */
             ['password', 'required', 'on' => self::SCENARIO_REGISTER],
             ['password', 'string', 'min' => 6],
@@ -296,8 +311,8 @@ class User extends ActiveRecord implements IdentityInterface
     public function getCountryWithFlag()
     {
         return strtr("{flag} {country}",[
-            '{flag}' => Flag::widget(['country' => $this->contry]),
-            '{country}' => Yii::t('app', $this->contry)
+            '{flag}' => Flag::widget(['country' => $this->country]),
+            '{country}' => Yii::t('app', $this->country)
         ]);
     }
 }

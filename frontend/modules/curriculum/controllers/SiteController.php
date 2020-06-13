@@ -52,6 +52,8 @@ class SiteController extends SiteBaseController
                     'timer' => 2000,
                 ],
             ]);
+
+            return $this->redirect('/curriculum');
         } 
 
         return $this->render('update', [

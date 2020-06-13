@@ -3,6 +3,10 @@
 use yii\bootstrap4\activeForm;
 use yii\helpers\Html;
 
+$submitButtonLabel = $model->isNewRecord?
+    Yii::t('app', 'I\'m ready!'):
+    Yii::t('app', 'Update for me!');
+
 ?>
 
 
@@ -18,6 +22,6 @@ use yii\helpers\Html;
     </div>
 
     <div class="form-group">
-        <?= Html::submitButton('Próximo', ['class' => 'btn btn-block btn-rounded btn-outline-primary', 'name' => 'login-button']) ?>
+        <?= Html::submitButton($submitButtonLabel, ['class' => 'btn btn-block btn-rounded btn-outline-primary', 'name' => 'login-button']) ?>
     </div>
 <?php activeForm::end()?>

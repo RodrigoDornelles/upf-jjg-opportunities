@@ -1,6 +1,7 @@
 <?php 
 
 use yii\widgets\DetailView;
+use kartik\icons\Icon;
 
 $this->title = Yii::t('app', 'Curriculum');
 ?>
@@ -10,19 +11,14 @@ $this->title = Yii::t('app', 'Curriculum');
     'showButtons' => [
         'custom' => [
             [
-                'title' => 'Download',
-                'url' => '/curriculo/pdf',
-                'options' => [ 'class' => 'btn btn-info' ]
+                'title' => Icon::show('eye').'View',
+                'url' => '/curriculum/view',
+                'options' => [ 'class' => 'btn btn-rounded btn-outline-info' ]
             ],
             [
-                'title' => 'View',
-                'url' => '/curriculo/pdf',
-                'options' => [ 'class' => 'btn btn-info' ]
-            ],
-            [
-                'title' => 'Update',
-                'url' => '/agendamentos-assunto',
-                'options' => [ 'class' => 'btn btn-info' ]
+                'title' => Icon::show('pen').'Update',
+                'url' => '/curriculum/update',
+                'options' => [ 'class' => 'btn btn-rounded btn-outline-info' ]
             ],
         ],
     ]

@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $form->field($model, 'email') ?>
 
-        <?= $form->field($model, 'contry')->widget(Select2::classname(), [
+        <?= $form->field($model, 'country')->widget(Select2::classname(), [
             'data' => Local::getDropdownListCountrys(),
             'theme' => Select2::THEME_BOOTSTRAP,
             'options' => ['placeholder' => 'Select a state ...'],

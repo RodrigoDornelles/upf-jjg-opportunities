@@ -16,6 +16,7 @@ class m200612_210933_add_table_curriculum extends Migration
             'id' => $this->primaryKey(),
             'id_user' => $this->integer()->unique()->notNull(),
             'abstract' => $this->string(522),
+            'public' => $this->boolean()->defaultValue(false),
             'date_created_at' => $this->dateTime()->notNull(),
             'date_updated_at' => $this->dateTime()->notNull(),
         ]);

@@ -15,8 +15,9 @@ class m200520_160631_add_table_user extends Migration
         $this->createTable('user', [
             'id' => $this->primaryKey(),
             'name' => $this->string(255)->notNull(),
+            'slug' => $this->string(255),
             'email' => $this->string(255)->notNull()->unique(),
-            'contry' => $this->char(2)->notNull(),
+            'country' => $this->char(2)->notNull(),
             'status' => $this->char(1)->notNull()->defaultValue('I'),
             'auth_key' => $this->string(32)->notNull(),
             'password_hash' => $this->string()->notNull(),

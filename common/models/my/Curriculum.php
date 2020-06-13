@@ -54,8 +54,8 @@ class Curriculum extends \common\models\BaseModel
             'user.age' => Yii::t('app', 'Age'),
             'user.email' => Yii::t('app', 'Email'),
             'user.countryWithFlag' => Yii::t('app', 'Country'),
-            'date_created_at' => Yii::t('app', 'Date Created At'),
-            'date_updated_at' => Yii::t('app', 'Date Updated At'),
+            'date_created_at' => Yii::t('app', 'Created At'),
+            'date_updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
 

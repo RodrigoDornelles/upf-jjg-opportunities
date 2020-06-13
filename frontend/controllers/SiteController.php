@@ -38,7 +38,7 @@ class SiteController extends SiteBaseController
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->redirect(['/curriculum/site/index']);
     }
 
     
