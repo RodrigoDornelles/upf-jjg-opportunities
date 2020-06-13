@@ -26,12 +26,12 @@ Icon::map($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="bg-black text-white">
+<body class="bg-black text-white" >
 <?php $this->beginBody() ?>
 
 <?php 
 NavBar::begin([
-    'brandLabel' => Yii::$app->name,
+    'brandLabel' => Html::img('@jjg/logo-white-1.png', ['alt' => Yii::$app->name, 'width' => 32]),
     'options' => [
         'class' => 'navbar navbar-dark bg-dark fixed-top'
     ]
