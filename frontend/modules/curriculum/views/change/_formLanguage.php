@@ -23,10 +23,10 @@ $this->registerJs('jQuery("#form-curriculum-language").on("pjax:end", function()
 <h5>Languages</h5>
 <div class="row margin10B">
     <div class="col-md-6">
-        <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => "Languages"])->label(false)?>
+        <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('name')])->label(false)?>
     </div> 
     <div class="col-md-3">
-        <?= $form->field($model, 'level')->dropDownList(CurriculumLanguage::LEVEL_LIST, ['prompt'=>'Level'])->label(false)?>
+        <?= $form->field($model, 'level')->dropDownList(CurriculumLanguage::LEVEL_LIST, ['prompt'=> $model->getAttributeLabel('level')])->label(false)?>
     </div>
     <div class="col-md-3">
         <?= Html::submitButton('Add', ['class' => 'btn btn-block btn-outline-success btn-rounded']) ?>
@@ -38,10 +38,13 @@ $this->registerJs('jQuery("#form-curriculum-language").on("pjax:end", function()
 <?php timurmelnikov\widgets\LoadingOverlayPjax::begin(['id' => 'grid-curriculum-language'])?>
 <?=GridView::widget([
     'pjax' => true,
+    'condensed' => true,
     'showHeader' => false,
+    'responsiveWrap' => true,
     'layout' => '{items}',
     'dataProvider' => $model->dataProvider,
     'columns' => $model->gridColumns,
-    'tableOptions' => ['class' => 'table table-dark table-striped table-bordered'],
+    'tableOptions' => ['class' => 'table-dark'],
+    'containerOptions' => ['class' => 'table-responsive']
 ])?>    
 <?php timurmelnikov\widgets\LoadingOverlayPjax::end() ?>

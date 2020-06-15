@@ -5,13 +5,13 @@ use yii\widgets\Pjax;
 use yii\bootstrap4\ActiveForm;
 use kartik\grid\GridView;
 
-$this->registerJs('jQuery("#form-curriculum-experience").on("pjax:end", function() {jQuery.pjax.reload({container:"#grid-curriculum-experience"})});');
+$this->registerJs('jQuery("#form-curriculum-graduate").on("pjax:end", function() {jQuery.pjax.reload({container:"#grid-curriculum-graduate"})});');
 ?>
 
 <!--IDIOMA -->
-<?php timurmelnikov\widgets\LoadingOverlayPjax::begin(['id' => 'form-curriculum-experience'])?> 
+<?php timurmelnikov\widgets\LoadingOverlayPjax::begin(['id' => 'form-curriculum-graduate'])?> 
 <?php $form = ActiveForm::begin([
-    'action'=> ['/curriculum/change/create-experience'],
+    'action'=> ['/curriculum/change/create-graduate'],
     'options' => [
         'class' => '',
         'enctype' => 'multipart/form-data',
@@ -19,15 +19,16 @@ $this->registerJs('jQuery("#form-curriculum-experience").on("pjax:end", function
     ],
 ])?>
 
-<h5>Experiences</h5>
+<h5>Graduates</h5>
 <div class="row">
     <div class="col-md-6">
-        <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('name')])->label(false)?>      
+        <?= $form->field($model, 'institute')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('institute')])->label(false)?>
+        
     </div> 
     <div class="col-md-6">
-        <?= $form->field($model, 'role')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('role')])->label(false)?>
+        <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('name')])->label(false)?>
     </div>
-</div> 
+</div>
 
 <div class="row">   
     <div class="col-md-3">
@@ -46,7 +47,7 @@ $this->registerJs('jQuery("#form-curriculum-experience").on("pjax:end", function
 <?php ActiveForm::end()?>
 <?php timurmelnikov\widgets\LoadingOverlayPjax::end()?>
 
-<?php timurmelnikov\widgets\LoadingOverlayPjax::begin(['id' => 'grid-curriculum-experience'])?>
+<?php timurmelnikov\widgets\LoadingOverlayPjax::begin(['id' => 'grid-curriculum-graduate'])?>
 <?=GridView::widget([
     'pjax' => true,
     'condensed' => true,

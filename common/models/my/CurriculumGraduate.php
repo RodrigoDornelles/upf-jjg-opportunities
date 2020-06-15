@@ -36,9 +36,10 @@ class CurriculumGraduate extends \common\models\BaseModel
     public function rules()
     {
         return [
-            [['id_curriculum'], 'required'],
+            [['id_curriculum', 'name', 'institute'], 'required'],
             [['id_curriculum', 'year_init', 'year_end'], 'integer'],
             [['name', 'institute'], 'string', 'max' => 150],
+            [['finish'], 'boolean'],
             [['id_curriculum'], 'exist', 'skipOnError' => true, 'targetClass' => Curriculum::className(), 'targetAttribute' => ['id_curriculum' => 'id']],
         ];
     }
@@ -56,6 +57,15 @@ class CurriculumGraduate extends \common\models\BaseModel
             'year_init' => Yii::t('app', 'Year Init'),
             'year_end' => Yii::t('app', 'Year End'),
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        Curriculum::updateAll(['date_updated_at' => new \yii\db\Expression('now()')], ['id' => $this->id_curriculum]);
+        parent::afterSave($insert, $changedAttributes);
     }
 
     /**
@@ -81,5 +91,46 @@ class CurriculumGraduate extends \common\models\BaseModel
         ]);
     }
 
-    
+    public function getGridColumns($searchModel = null)
+    {
+        return [
+            [
+                'class' => 'kartik\grid\EditableColumn',
+                'attribute' => 'institute',
+                'editableOptions' => ['formOptions' => ['action' => ['/curriculum/change/edit-graduate']]]
+            ],
+            [
+                'class' => 'kartik\grid\EditableColumn',
+                'attribute' => 'name',
+                'editableOptions' => ['formOptions' => ['action' => ['/curriculum/change/edit-graduate']]]
+            ],
+            [
+                'class' => 'kartik\grid\EditableColumn',
+                'attribute' => 'finish',
+                'format' => 'boolean',
+                'editableOptions' => [
+                    'inputType' => 'dropDownList',
+                    'data' => self::LIST_BOOLEAN,
+                    'displayValueConfig'=> self::LIST_BOOLEAN,
+                    'formOptions' => ['action' => ['edit-formacao']]
+                ]
+            ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{delete}',
+                'options' => ['width' => 32],
+                'buttons' => [
+                    'delete' => function ($url, $model) {
+                        return \yii\helpers\Html::a(Icon::show('trash'), \yii\helpers\Url::to(['delete', 'id' => $model->id, 'modelclass' => self::className()]), [
+                            'title' => 'Excluir',
+                            'class' => 'sa-delete',
+                            'data-pjax-id' => '#grid-curriculum-graduate',
+                            'data-question' => 'Do you want to remove?',
+                            'data-success' => 'Removed'
+                        ]);
+                    },
+                ]
+            ],
+        ];
+    }
 }

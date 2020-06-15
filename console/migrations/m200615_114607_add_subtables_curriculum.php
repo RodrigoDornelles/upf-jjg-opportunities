@@ -15,8 +15,9 @@ class m200615_114607_add_subtables_curriculum extends Migration
         $this->createTable('curriculum_experience', [
             'id' => $this->primaryKey(),
             'id_curriculum' => $this->integer()->notNull(),
-            'name' => $this->string(150),
-            'role' => $this->string(250),
+            'name' => $this->string(150)->notNull(),
+            'role' => $this->string(250)->notNull(),
+            'finish' => $this->boolean()->defaultValue(false)->notNull(),
             'year_init' => $this->smallInteger(),
             'year_end' => $this->smallInteger()  
         ]);
@@ -24,8 +25,9 @@ class m200615_114607_add_subtables_curriculum extends Migration
         $this->createTable('curriculum_graduate', [
             'id' => $this->primaryKey(),
             'id_curriculum' => $this->integer()->notNull(),
-            'name' => $this->string(150),
-            'institute' => $this->string(150),
+            'name' => $this->string(150)->notNull(),
+            'institute' => $this->string(150)->notNull(),
+            'finish' => $this->boolean()->defaultValue(false)->notNull(),
             'year_init' => $this->smallInteger(),
             'year_end' => $this->smallInteger()       
         ]);
@@ -33,8 +35,8 @@ class m200615_114607_add_subtables_curriculum extends Migration
         $this->createTable('curriculum_language', [
             'id' => $this->primaryKey(),
             'id_curriculum' => $this->integer()->notNull(),
-            'name' => $this->string(10),
-            'level' => $this->smallInteger(), 
+            'name' => $this->string(10)->notNull(),
+            'level' => $this->smallInteger()->notNull(), 
         ]);
 
         $this->createIndex(

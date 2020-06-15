@@ -13,10 +13,15 @@ $this->title = Yii::t('app', 'Curriculum - Changes');
 ])?>
 
 <section class="row justify-content-center">
-    <div class="col-md-9 col-lg-6">
+    <div class="col-md-11 col-lg-9">
 
     <?=$this->render('_formLanguage', [
         'model' => new CurriculumLanguage(['id_curriculum' => $model->id])
+    ])?>
+    <hr/>
+
+    <?=$this->render('_formGraduate', [
+        'model' => new CurriculumGraduate(['id_curriculum' => $model->id])
     ])?>
     <hr/>
 

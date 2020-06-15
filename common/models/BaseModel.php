@@ -5,6 +5,11 @@ use Yii;
 
 class BaseModel extends \yii\db\ActiveRecord
 {
+    const LIST_BOOLEAN = [
+        1 => 'Yes',
+        2 => 'No'
+    ];
+    
     public $order = ['id' => SORT_DESC];
     public $pageSize = 20;
 

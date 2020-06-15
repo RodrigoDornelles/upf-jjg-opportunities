@@ -124,9 +124,22 @@ a.desc:after {
 }
 
 .bg-black {
-    background-color: black;
+    background-color: #131313;
 }
 
 .btn-rounded {
     border-radius: 100px;
 }
+
+/** kartic grid-view fix responsive **/
+.grid-view td {
+    white-space: initial !important;
+}
+
+@media screen and (max-width: 480px) {
+    .kv-table-wrap tr > td:first-child {
+        border-top: 0 !important;
+        margin-top: 0 !important;
+    }  
+}
+

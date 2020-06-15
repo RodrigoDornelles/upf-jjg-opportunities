@@ -16,7 +16,9 @@ class AppAsset extends AssetBundle
         'css/tab-bottom.css',
     ];
     public $js = [
+        'js/site.js'
     ];
+    
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap4\BootstrapAsset',

@@ -36,7 +36,7 @@ class CurriculumExperience extends \common\models\BaseModel
     public function rules()
     {
         return [
-            [['id_curriculum'], 'required'],
+            [['id_curriculum', 'name', 'role'], 'required'],
             [['id_curriculum', 'year_init', 'year_end'], 'integer'],
             [['name'], 'string', 'max' => 150],
             [['role'], 'string', 'max' => 250],
@@ -57,6 +57,15 @@ class CurriculumExperience extends \common\models\BaseModel
             'year_init' => Yii::t('app', 'Year Init'),
             'year_end' => Yii::t('app', 'Year End'),
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        Curriculum::updateAll(['date_updated_at' => new \yii\db\Expression('now()')], ['id' => $this->id_curriculum]);
+        parent::afterSave($insert, $changedAttributes);
     }
 
     /**
@@ -103,7 +112,9 @@ class CurriculumExperience extends \common\models\BaseModel
                         return \yii\helpers\Html::a(Icon::show('trash'), \yii\helpers\Url::to(['delete', 'id' => $model->id, 'modelclass' => self::className()]), [
                             'title' => 'Excluir',
                             'class' => 'sa-delete',
-                            'data-pjax-id' => '#grid-curriculo-experiencia'
+                            'data-pjax-id' => '#grid-curriculum-experience',
+                            'data-question' => 'Do you want to remove?',
+                            'data-success' => 'Removed'
                         ]);
                     },
                 ]

@@ -77,7 +77,7 @@ class ChangeController extends SiteBaseController
         }
                 
         if ($model->delete() && Yii::$app->request->isAjax) {
-            return 'success';               
+            return true;               
         }
 
         return $this->redirect(['index']);
