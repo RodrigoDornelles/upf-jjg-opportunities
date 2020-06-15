@@ -47,7 +47,7 @@ return [
                 'classroom' => 'classroom/site/index',
                 'jobs' => 'jobs/site/index',
                 'curriculum/<controller:[-\w]+>/<action:[-\w]+>' => 'curriculum/<controller>/<action>', 
-                'curriculum/<action:[-\w]+>' => 'curriculum/site/<action>', 
+                'curriculum/<controller:[-\w]+>' => 'curriculum/<controller>/index', 
                 'classroom/<controller:[-\w]+>/<action:[-\w]+>' => 'classroom/<controller>/<action>', 
                 'classroom/<controller:[-\w]+>' => 'classroom/<controller>/index', 
                 'jobs/<controller:[-\w]+>/<action:[-\w]+>' => 'jobs/<controller>/<action>', 

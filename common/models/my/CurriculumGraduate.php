@@ -2,6 +2,10 @@
 
 namespace common\models\my;
 
+use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
+use kartik\icons\Icon;
+
 use Yii;
 
 /**
@@ -47,7 +51,7 @@ class CurriculumGraduate extends \common\models\BaseModel
         return [
             'id' => Yii::t('app', 'ID'),
             'id_curriculum' => Yii::t('app', 'Id Curriculum'),
-            'name' => Yii::t('app', 'Name'),
+            'name' => Yii::t('app', 'Course'),
             'institute' => Yii::t('app', 'Institute'),
             'year_init' => Yii::t('app', 'Year Init'),
             'year_end' => Yii::t('app', 'Year End'),
@@ -63,4 +67,19 @@ class CurriculumGraduate extends \common\models\BaseModel
     {
         return $this->hasOne(Curriculum::className(), ['id' => 'id_curriculum']);
     }
+
+    /**
+     * Gets All Graduates
+     *
+     * @return \yii\data\ActiveDataProvider
+     */
+    public function getDataProvider()
+    {
+        return new ActiveDataProvider([
+            'query' => self::find()->andWhere(['id_curriculum' => $this->id_curriculum]),
+            'pagination' => false
+        ]);
+    }
+
+    
 }

@@ -28,7 +28,8 @@
         "dominus77/yii2-sweetalert2-widget": "*",
         "kv4nt/yii2-owl-carousel2": "*",
         "powerkernel/yii2-flag-icon-css": "*",
-        "timurmelnikov/yii2-loading-overlay": "*"
+        "timurmelnikov/yii2-loading-overlay": "*",
+        "kartik-v/yii2-editable": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

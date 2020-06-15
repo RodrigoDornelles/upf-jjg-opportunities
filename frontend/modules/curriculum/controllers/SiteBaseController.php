@@ -17,8 +17,8 @@ class SiteBaseController extends \frontend\controllers\SiteBaseController
             return false;
         }
 
-        if(Curriculum::one()->isNewRecord && !($this->id == 'site' && $action->id == 'create')){
-            return $this->redirect(['/curriculum/create']);
+        if(Curriculum::one()->isNewRecord && !($this->id == 'change' && $action->id == 'init')){
+            return $this->redirect(['/curriculum/change/init']);
         }
 
         return true;

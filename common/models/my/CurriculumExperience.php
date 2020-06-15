@@ -2,6 +2,10 @@
 
 namespace common\models\my;
 
+use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
+use kartik\icons\Icon;
+
 use Yii;
 
 /**
@@ -48,7 +52,7 @@ class CurriculumExperience extends \common\models\BaseModel
         return [
             'id' => Yii::t('app', 'ID'),
             'id_curriculum' => Yii::t('app', 'Id Curriculum'),
-            'name' => Yii::t('app', 'Name'),
+            'name' => Yii::t('app', 'Company'),
             'role' => Yii::t('app', 'Role'),
             'year_init' => Yii::t('app', 'Year Init'),
             'year_end' => Yii::t('app', 'Year End'),
@@ -63,5 +67,47 @@ class CurriculumExperience extends \common\models\BaseModel
     public function getCurriculum()
     {
         return $this->hasOne(Curriculum::className(), ['id' => 'id_curriculum']);
+    }
+
+    /**
+     * Gets All Experiences
+     *
+     * @return \yii\data\ActiveDataProvider
+     */
+    public function getDataProvider()
+    {
+        return new ActiveDataProvider([
+            'query' => self::find()->andWhere(['id_curriculum' => $this->id_curriculum]),
+            'pagination' => false
+        ]);
+    }
+
+    public function getGridColumns($searchModel = null)
+    {
+        return [
+            [
+                'class' => 'kartik\grid\EditableColumn',
+                'attribute' => 'name',
+                'editableOptions' => ['formOptions' => ['action' => ['/curriculum/change/edit-experience']]]
+            ],
+            [
+                'class' => 'kartik\grid\EditableColumn',
+                'attribute' => 'role',
+                'editableOptions' => ['formOptions' => ['action' => ['/curriculum/change/edit-experience']]]
+            ],
+            ['class' => 'yii\grid\ActionColumn',
+                'options' => ['width' => 32],
+                'template' => '{delete}',
+                'buttons' => [
+                    'delete' => function ($url, $model) {
+                        return \yii\helpers\Html::a(Icon::show('trash'), \yii\helpers\Url::to(['delete', 'id' => $model->id, 'modelclass' => self::className()]), [
+                            'title' => 'Excluir',
+                            'class' => 'sa-delete',
+                            'data-pjax-id' => '#grid-curriculo-experiencia'
+                        ]);
+                    },
+                ]
+            ],
+        ];
     }
 }

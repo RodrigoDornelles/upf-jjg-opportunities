@@ -12,12 +12,12 @@ $this->title = Yii::t('app', 'Curriculum');
         'custom' => [
             [
                 'title' => Icon::show('eye').'View',
-                'url' => '/curriculum/view',
+                'url' => '/curriculum/site/view',
                 'options' => [ 'class' => 'btn btn-rounded btn-outline-info' ]
             ],
             [
                 'title' => Icon::show('pen').'Update',
-                'url' => '/curriculum/update',
+                'url' => '/curriculum/change',
                 'options' => [ 'class' => 'btn btn-rounded btn-outline-info' ]
             ],
         ],
