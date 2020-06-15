@@ -1,6 +1,8 @@
 <?php
 namespace common\models;
 
+use yii\helpers\ArrayHelper;
+
 use Yii;
 
 class BaseModel extends \yii\db\ActiveRecord
@@ -30,4 +32,35 @@ class BaseModel extends \yii\db\ActiveRecord
         return true;
     }
 
+    public function getRelationNames($relation,$params = [])
+    {
+        $separator = ArrayHelper::getValue($params, 'separator', "<br/>");
+        $attribute = ArrayHelper::getValue($params, 'attribute', 'name');
+
+        $rows = $this->$relation;
+
+        if (!$rows) {
+            return null;
+        }
+
+        $relationArr = array();
+        foreach ($rows as $key => $row) {
+
+            if (is_array($attribute)){
+                $values = array();
+
+                foreach ($attribute as $attr){
+                    $values[]= $row->getAttribute($attr);
+                }
+
+                $relationArr[] = implode($separator, $values);
+                continue;
+            }
+
+            $relationArr[] = $row->getAttribute($attribute);
+        }
+
+        return implode(!is_array($attribute)? $separator: '<br/>', $relationArr);
+    }
+    
 }
