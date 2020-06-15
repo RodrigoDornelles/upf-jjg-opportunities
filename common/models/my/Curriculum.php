@@ -70,6 +70,36 @@ class Curriculum extends \common\models\BaseModel
     }
 
     /**
+     * Gets query for [[CurriculumExperiences]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCurriculumExperiences()
+    {
+        return $this->hasMany(CurriculumExperience::className(), ['id_curriculum' => 'id']);
+    }
+
+    /**
+     * Gets query for [[CurriculumGraduates]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCurriculumGraduates()
+    {
+        return $this->hasMany(CurriculumGraduate::className(), ['id_curriculum' => 'id']);
+    }
+
+    /**
+     * Gets query for [[CurriculumLanguages]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCurriculumLanguages()
+    {
+        return $this->hasMany(CurriculumLanguage::className(), ['id_curriculum' => 'id']);
+    }
+
+    /**
      * Gets Singleton My Curriculum
      *
      * @return object
