@@ -1,5 +1,6 @@
 <?php 
 
+use kartik\icons\Icon;
 use common\models\my\CurriculumLanguage;
 use common\models\my\CurriculumGraduate;
 use common\models\my\CurriculumExperience;
@@ -7,9 +8,21 @@ use common\models\my\CurriculumExperience;
 $this->title = Yii::t('app', 'Curriculum - Changes');
 ?>
 
-<section> 
 <?= $this->render('@frontend/views/commons/_crudHeader',[
-    'showButtons' => []
+    'showButtons' => [
+        'custom' => [
+            [
+                'title' => Icon::show('print').'Print Now',
+                'url' => '/curriculum/pdf',
+                'options' => [ 'class' => 'btn btn-rounded btn-outline-info', 'target' => '_blank' ]
+            ],
+            [
+                'title' => Icon::show('info').'Detais',
+                'url' => '/curriculum',
+                'options' => [ 'class' => 'btn btn-rounded btn-outline-info' ]
+            ],
+        ],
+    ]
 ])?>
 
 <section class="row justify-content-center">

@@ -11,9 +11,9 @@ $this->title = Yii::t('app', 'Curriculum');
     'showButtons' => [
         'custom' => [
             [
-                'title' => Icon::show('eye').'View',
-                'url' => '/curriculum/site/view',
-                'options' => [ 'class' => 'btn btn-rounded btn-outline-info' ]
+                'title' => Icon::show('print').'Print Now',
+                'url' => '/curriculum/pdf',
+                'options' => [ 'class' => 'btn btn-rounded btn-outline-info', 'target' => '_blank' ]
             ],
             [
                 'title' => Icon::show('pen').'Update',

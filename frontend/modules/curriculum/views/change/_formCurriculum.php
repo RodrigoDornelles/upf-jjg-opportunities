@@ -17,7 +17,7 @@ $submitButtonLabel = $model->isNewRecord?
 
     <div class="row">
         <div class="col-md-12">
-            <?= $form->field($model, 'abstract')->textArea(['autofocus' => true, 'rows' => 4, 'max-legnt' => true]) ?>
+            <?= $form->field($model, 'abstract')->textArea(['autofocus' => $model->isNewRecord, 'rows' => 4, 'max-legnt' => true]) ?>
         </div>
     </div>
 

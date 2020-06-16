@@ -80,7 +80,7 @@ class CurriculumLanguage extends \common\models\BaseModel
         return $this->hasOne(Curriculum::className(), ['id' => 'id_curriculum']);
     }
 
-    public function GetLevelFormated()
+    public function getLevelFormated()
     {
         return ArrayHelper::getValue($this->level, self::LEVEL_LIST, null);
     }

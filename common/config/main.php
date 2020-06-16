@@ -1,6 +1,6 @@
 <?php
 return [
-    'name' => 'JJG',
+    'name' => 'JJG Opportunities',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
