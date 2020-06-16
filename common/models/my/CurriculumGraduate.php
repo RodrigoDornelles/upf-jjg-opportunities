@@ -53,9 +53,10 @@ class CurriculumGraduate extends \common\models\BaseModel
             'id' => Yii::t('app', 'ID'),
             'id_curriculum' => Yii::t('app', 'Id Curriculum'),
             'name' => Yii::t('app', 'Course'),
+            'finish' => Yii::t('app', 'Concluded?'),
             'institute' => Yii::t('app', 'Institute'),
-            'year_init' => Yii::t('app', 'Year Init'),
-            'year_end' => Yii::t('app', 'Year End'),
+            'year_init' => Yii::t('app', 'Beginning In'),
+            'year_end' => Yii::t('app', 'Finished In'),
         ];
     }
 

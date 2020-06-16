@@ -40,6 +40,7 @@ class CurriculumExperience extends \common\models\BaseModel
             [['id_curriculum', 'year_init', 'year_end'], 'integer'],
             [['name'], 'string', 'max' => 150],
             [['role'], 'string', 'max' => 250],
+            [['finish'], 'boolean'],
             [['id_curriculum'], 'exist', 'skipOnError' => true, 'targetClass' => Curriculum::className(), 'targetAttribute' => ['id_curriculum' => 'id']],
         ];
     }
@@ -52,10 +53,11 @@ class CurriculumExperience extends \common\models\BaseModel
         return [
             'id' => Yii::t('app', 'ID'),
             'id_curriculum' => Yii::t('app', 'Id Curriculum'),
+            'finish' => Yii::t('app', 'Currently working?'),
             'name' => Yii::t('app', 'Company'),
             'role' => Yii::t('app', 'Role'),
-            'year_init' => Yii::t('app', 'Year Init'),
-            'year_end' => Yii::t('app', 'Year End'),
+            'year_init' => Yii::t('app', 'Beginning In'),
+            'year_end' => Yii::t('app', 'Stopped In'),
         ];
     }
 
