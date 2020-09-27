@@ -17,12 +17,10 @@ class SiteBaseController extends \frontend\controllers\SiteBaseController
             return false;
         }
 
-        if(Curriculum::one()->isNewRecord && !($this->id == 'change' && $action->id == 'init')){
-            return $this->redirect(['/curriculum/change/init']);
+        if(Curriculum::one()->isNewRecord && !($this->id == 'my' && $action->id == 'update')){
+            return $this->redirect(['/curriculum/my/update']);
         }
 
         return true;
     }
-    
-
 }

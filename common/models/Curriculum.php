@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use kartik\mpdf\Pdf;
 use Yii;
 
 /**
@@ -18,6 +19,7 @@ use Yii;
 class Curriculum extends \common\models\BaseModel
 {
     private static $_curriculum;
+    private $_pdf;
 
     /**
      * {@inheritdoc}
@@ -94,4 +96,32 @@ class Curriculum extends \common\models\BaseModel
         // return curriculum object model
         return $_curriculum;
     } 
+
+    /**
+     * PDF Format Curriculum
+     *
+     * @return object
+     */
+    public function getPdf()
+    {
+        if ($this->_pdf === null) {
+            $this->_pdf = new Pdf([
+                'mode' => Pdf::MODE_CORE, 
+                'format' => Pdf::FORMAT_A4,
+                'orientation' => Pdf::ORIENT_PORTRAIT, 
+                'destination' => Pdf::DEST_BROWSER, 
+                'content' => Yii::$app->controller->renderPartial('//commons/_curriculum', [
+                    'model' => $this
+                ]),  
+                'cssFile' => '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css',
+                'cssInline' => '.kv-heading-1{font-size:18px}', 
+                'options' => ['title' => 'Curriculum'],
+                'methods' => [ 
+                    'SetFooter'=>[Yii::$app->name], 
+                ]
+            ]);
+        }
+
+        return $this->_pdf;
+    }
 }

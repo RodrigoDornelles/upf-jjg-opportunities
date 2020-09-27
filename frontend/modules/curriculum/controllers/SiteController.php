@@ -12,10 +12,7 @@ class SiteController extends SiteBaseController
 {
     function actionIndex()
     {
-        return $this->render('index', [
-            'model' => Curriculum::one()
-        ]);
+        return $this->render('index');
     }
 
-    
 }

@@ -1,8 +1,8 @@
 <?php 
 
-$languages = $model->curriculumLanguages;
-$gradautes = $model->curriculumGraduates;
-$experiences = $model->curriculumExperiences;
+$languages = [];
+$gradautes = [];
+$experiences = [];
 ?>
 
 <h1><?=$model->user->name?></h1>

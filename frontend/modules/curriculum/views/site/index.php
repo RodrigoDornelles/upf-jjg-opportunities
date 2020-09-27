@@ -1,47 +1,15 @@
 <?php 
 
-use yii\widgets\DetailView;
-use kartik\icons\Icon;
+use yii\helpers\Html;
 
-$this->title = Yii::t('app', 'Curriculum');
+$this->title = Yii::t('app', 'Welcome {fulano}!', [
+    'fulano' => Yii::$app->user->identity->name,
+]);
 ?>
 
 <section> 
-<?= $this->render('@frontend/views/commons/_crudHeader',[
-    'showButtons' => [
-        'custom' => [
-            [
-                'title' => Icon::show('print').'Print Now',
-                'url' => '/curriculum/pdf',
-                'options' => [ 'class' => 'btn btn-rounded btn-outline-info', 'target' => '_blank' ]
-            ],
-            [
-                'title' => Icon::show('pen').'Update',
-                'url' => '/curriculum/change',
-                'options' => [ 'class' => 'btn btn-rounded btn-outline-info' ]
-            ],
-        ],
-    ]
-])?>
-
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <?=DetailView::widget([
-                'model' => $model,
-                'options' => [
-                    'class' => 'table table-dark table-striped table-bordered detail-view'
-                ],
-                'attributes' => [
-                    'user.name',
-                    'user.age',
-                    'user.countryWithFlag:raw',
-                    'user.email:email',
-                    'abstract:nText',
-                    'date_created_at:relativeTime',
-                    'date_updated_at:relativeTime'
-                ]
-            ])?>
-        </div>
-    </div>
+    <h1><?=$this->title?></h1>
+    <h2>how can we help you with your curriculum?</h2>
+    <?=Html::a('view my curriculum', ['/curriculum/my/view'])?>
 </section>
 

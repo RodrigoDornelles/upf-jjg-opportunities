@@ -6,7 +6,6 @@ use yii\helpers\Html;
 $submitButtonLabel = $model->isNewRecord?
     Yii::t('app', 'I\'m ready!'):
     Yii::t('app', 'Update for me!');
-
 ?>
 
 
