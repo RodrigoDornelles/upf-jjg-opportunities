@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 use kartik\mpdf\Pdf;
 use Yii;
 
@@ -11,6 +13,9 @@ use Yii;
  * @property int $id
  * @property int $id_user
  * @property string|null $abstract
+ * @property mixed $experience
+ * @property mixed $language
+ * @property mixed $graduate
  * @property string $date_created_at
  * @property string $date_updated_at
  *
@@ -18,6 +23,13 @@ use Yii;
  */
 class Curriculum extends \common\models\BaseModel
 {
+    const LANG_LEVEL_LIST = [
+        'B' => 'Basic',	
+        'I' => 'Intermediate',	
+        'A' => 'Advanced',	
+        'F' => 'Fluent'
+    ];
+
     private static $_curriculum;
     private $_pdf;
 
@@ -37,6 +49,7 @@ class Curriculum extends \common\models\BaseModel
         return [
             [['id_user'], 'required'],
             [['id_user'], 'integer'],
+            [['experience', 'language', 'graduate'], 'safe'],
             [['abstract'], 'string', 'max' => 522],
             [['id_user'], 'unique'],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\User::className(), 'targetAttribute' => ['id_user' => 'id']],
@@ -54,6 +67,7 @@ class Curriculum extends \common\models\BaseModel
             'abstract' => Yii::t('app', 'Abstract'),
             'experience' => Yii::t('app', 'Experiences'),
             'language' => Yii::t('app', 'Languages'),
+            'language_level' => Yii::t('app', 'Level'),
             'graduate' => Yii::t('app', 'Graduates'),
             'user.name' => Yii::t('app', 'Name'),
             'user.age' => Yii::t('app', 'Age'),
@@ -62,6 +76,33 @@ class Curriculum extends \common\models\BaseModel
             'date_created_at' => Yii::t('app', 'Created At'),
             'date_updated_at' => Yii::t('app', 'Updated At'),
         ];
+    }
+
+     /**
+     * {@inheritdoc}
+     */
+    public function beforeSave($insert)
+    {
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+        
+        $this->experience = Json::encode($this->experience);
+        $this->language = Json::encode($this->language);
+        $this->graduate = Json::encode($this->graduate);
+
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function afterFind()
+    {
+        parent::afterFind();
+        $this->experience = Json::decode($this->experience, true);
+        $this->language = Json::decode($this->language, true);
+        $this->graduate = Json::decode($this->graduate, true);
     }
 
     /**
@@ -123,5 +164,22 @@ class Curriculum extends \common\models\BaseModel
         }
 
         return $this->_pdf;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLanguages()
+    {
+        $html = "";
+
+        foreach($this->language as $item){
+            $html .= $item['lang'];
+            $html .= " ";
+            $html .= ArrayHelper::getValue(self::LANG_LEVEL_LIST, $item['level'], null);
+            $html .= "<br/>";
+        }
+        
+        return $html;
     }
 }

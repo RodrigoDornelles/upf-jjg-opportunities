@@ -1,6 +1,6 @@
 <?php 
 
-$languages = [];
+$languages = $model->languages;
 $gradautes = [];
 $experiences = [];
 ?>
@@ -52,9 +52,5 @@ $experiences = [];
 
 <?php if ($languages):?>
 <h3>Languages</h3>
-<ul>
-    <?php foreach($languages as $language):?>
-        <li><?=$language->name?> <small><?=$language->getLevelFormated()?></small></li>
-    <?php endforeach?>
-</ul><br/>
+<?=$languages?>
 <?php endif?>

@@ -37,6 +37,7 @@ $this->title = Yii::t('app', 'Curriculum');
                     'user.countryWithFlag:raw',
                     'user.email:email',
                     'abstract:nText',
+                    'languages:html',
                     'date_created_at:relativeTime',
                     'date_updated_at:relativeTime'
                 ]
