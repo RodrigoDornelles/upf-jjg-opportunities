@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models\my;
+namespace common\models;
 
 use Yii;
 
@@ -73,51 +73,25 @@ class Curriculum extends \common\models\BaseModel
     }
 
     /**
-     * Gets query for [[CurriculumExperiences]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCurriculumExperiences()
-    {
-        return $this->hasMany(CurriculumExperience::className(), ['id_curriculum' => 'id']);
-    }
-
-    /**
-     * Gets query for [[CurriculumGraduates]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCurriculumGraduates()
-    {
-        return $this->hasMany(CurriculumGraduate::className(), ['id_curriculum' => 'id']);
-    }
-
-    /**
-     * Gets query for [[CurriculumLanguages]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCurriculumLanguages()
-    {
-        return $this->hasMany(CurriculumLanguage::className(), ['id_curriculum' => 'id']);
-    }
-
-    /**
      * Gets Singleton My Curriculum
      *
      * @return object
      */
     public static function one()
     {
+        // if already instantiated return curriculum object model
         if (static::$_curriculum){
             return $_curriculum;
         }
 
+        // try to instantiate corresponding model for the curriculum
         if (($_curriculum = static::findOne(['id_user' => Yii::$app->user->identity->id])) == null){
+            // create new model for the curriculum
             $_curriculum = new static;
             $_curriculum->id_user = Yii::$app->user->identity->id;
         }
 
+        // return curriculum object model
         return $_curriculum;
     } 
 }

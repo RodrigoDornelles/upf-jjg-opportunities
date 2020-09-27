@@ -1,7 +1,7 @@
 <?php
 namespace frontend\modules\curriculum\controllers;
 
-use common\models\my\Curriculum;
+use common\models\Curriculum;
 
 use Yii;
 

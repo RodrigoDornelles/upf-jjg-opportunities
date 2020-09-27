@@ -36,27 +36,6 @@ $this->title = Yii::t('app', 'Curriculum');
                     'user.age',
                     'user.countryWithFlag:raw',
                     'user.email:email',
-                    [
-                        'format' => 'raw',
-                        'attribute' => 'language', 
-                        'value' => function ($model) {
-                            return $model->getRelationNames('curriculumLanguages');
-                        }
-                    ],
-                    [
-                        'format' => 'raw',
-                        'attribute' => 'graduate', 
-                        'value' => function ($model) {
-                            return $model->getRelationNames('curriculumGraduates', ['attribute' => ['institute', 'name'], 'separator' => "\t-\t"]);
-                        }
-                    ],
-                    [
-                        'format' => 'raw',
-                        'attribute' => 'experience', 
-                        'value' => function ($model) {
-                            return $model->getRelationNames('curriculumExperiences', ['attribute' => ['name', 'role'], 'separator' => "\t-\t"]);
-                        }
-                    ],
                     'abstract:nText',
                     'date_created_at:relativeTime',
                     'date_updated_at:relativeTime'

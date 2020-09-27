@@ -1,10 +1,7 @@
 <?php
 namespace frontend\modules\curriculum\controllers;
 
-use common\models\my\Curriculum;
-use common\models\my\CurriculumLanguage;
-use common\models\my\CurriculumGraduate;
-use common\models\my\CurriculumExperience;
+use common\models\Curriculum;
 use kartik\grid\EditableColumnAction;
 
 use yii\helpers\ArrayHelper;
@@ -16,73 +13,6 @@ use Yii;
  */
 class ChangeController extends SiteBaseController
 {
-    public function actions()
-    {
-        return ArrayHelper::merge(parent::actions(), [
-            'edit-language' => [                                      
-                'class' => EditableColumnAction::className(),  
-                'modelClass' => CurriculumLanguage::className(),
-            ],
-            'edit-graduate' => [                                      
-                'class' => EditableColumnAction::className(),  
-                'modelClass' => CurriculumGraduate::className(),
-            ],
-            'edit-experience' => [                                      
-                'class' => EditableColumnAction::className(),  
-                'modelClass' => CurriculumExperience::className(),
-            ]
-        ]);
-    }
-
-    public function actionCreateLanguage()
-    {
-        $model = new CurriculumLanguage(['id_curriculum' => Curriculum::one()->id]);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()){
-            return $this->renderAjax('_formLanguage', ['model'=> $model]);
-        }
-    }
-
-    public function actionCreateGraduate()
-    {
-        $model = new CurriculumGraduate(['id_curriculum' => Curriculum::one()->id]);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()){
-            return $this->renderAjax('_formGraduate', ['model'=> $model]);
-        }
-    }
-
-    public function actionCreateExperience()
-    {
-        $model = new CurriculumExperience(['id_curriculum' => Curriculum::one()->id]);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()){
-            return $this->renderAjax('_formExperience', ['model'=> $model]);
-        }
-    }
-
-    /**
-     * Delete Curriculum apend
-     *
-     * @param string $modelclass
-     * @param id $id
-     * @return mixed html
-     */
-    public function actionDelete($modelclass, $id)
-    {
-        $model = (new $modelclass)->findOne(['id'=> $id, 'id_curriculum' => Curriculum::one()->id]);
-
-        if(!$model){
-            throw new \yii\web\NotFoundHttpException('Já foi removido!');
-        }
-                
-        if ($model->delete() && Yii::$app->request->isAjax) {
-            return true;               
-        }
-
-        return $this->redirect(['index']);
-    }
-
     /**
      * Update Curriculum basics info
      *

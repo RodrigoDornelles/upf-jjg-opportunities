@@ -29,7 +29,8 @@
         "kv4nt/yii2-owl-carousel2": "*",
         "powerkernel/yii2-flag-icon-css": "*",
         "timurmelnikov/yii2-loading-overlay": "*",
-        "kartik-v/yii2-editable": "*"
+        "kartik-v/yii2-editable": "*",
+        "unclead/yii2-multiple-input": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

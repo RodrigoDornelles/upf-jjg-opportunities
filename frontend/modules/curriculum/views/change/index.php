@@ -27,23 +27,9 @@ $this->title = Yii::t('app', 'Curriculum - Changes');
 
 <section class="row justify-content-center">
     <div class="col-md-11 col-lg-9">
-
-    <?=$this->render('_formLanguage', [
-        'model' => new CurriculumLanguage(['id_curriculum' => $model->id])
-    ])?>
     <hr/>
 
-    <?=$this->render('_formGraduate', [
-        'model' => new CurriculumGraduate(['id_curriculum' => $model->id])
-    ])?>
-    <hr/>
-
-    <?=$this->render('_formExperience', [
-        'model' => new CurriculumExperience(['id_curriculum' => $model->id])
-    ])?>
-    <hr/>
-
-    <?=$this->render('_formCurriculum', [
+    <?=$this->render('_form', [
         'model' => $model
     ])?>
     </div>
